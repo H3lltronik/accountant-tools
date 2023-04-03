@@ -1,0 +1,101 @@
+// Form container
+.form_container {
+  margin: auto;
+  display: flex;
+  max-width: 500px;
+  margin-bottom: 1rem;
+  flex-direction: column;
+
+  // Form title
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  // Form group
+  &__group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    // Form label
+    &__label {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #666;
+    }
+
+    // Form item
+    &__item {
+      display: flex;
+      flex-direction: column;
+
+      // Form input
+      &__input {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        padding: 0.5rem;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+          border-color: #2962ff;
+          box-shadow: 0 0 3px #2962ff;
+          outline: none;
+        }
+
+        &--error {
+          border-color: #f44336;
+        }
+      }
+
+      // Form select
+      &__select {
+        appearance: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        padding: 0.5rem;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+          border-color: #2962ff;
+          box-shadow: 0 0 3px #2962ff;
+          outline: none;
+        }
+
+        &--error {
+          border-color: #f44336;
+        }
+      }
+
+      // Form textarea
+      &__textarea {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        padding: 0.5rem;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+          border-color: #2962ff;
+          box-shadow: 0 0 3px #2962ff;
+          outline: none;
+        }
+
+        &--error {
+          border-color: #f44336;
+        }
+      }
+
+      // Form error message
+      &__error {
+        font-size: 0.8rem;
+        color: #f44336;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
