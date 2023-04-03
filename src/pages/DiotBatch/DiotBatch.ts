@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api/tauri";
 import { open } from "@tauri-apps/api/dialog";
+import { openModal } from "@/store/modal.store";
 
 export const handleSelectFolder = async () => {
   try {
@@ -17,7 +18,8 @@ export const handleSelectFolder = async () => {
 
 export const handleSelectFile = async () => {
   try {
-    const selectedFile = (await open()) as string;
+    const filters = [{ name: 'Excel Files', extensions: ['xlsx', 'xls'] }];
+    const selectedFile = (await open({ filters })) as string;
     if (!selectedFile) return;
     return selectedFile;
   } catch (error) {
@@ -25,9 +27,14 @@ export const handleSelectFile = async () => {
   }
 };
 
-export const handleBeginProccess = async (folderPath, filePath) => {
+export const handleBeginProcess = async (folderPath, filePath) => {
   try {
-    const result = await invoke("excel", { filePath, folderPath });
+    const result = await invoke("excel_to_diot", { filePath, folderPath });
+    console.log(result);
+    if (result == "ok") {
+      openModal({ title: "Success", message: "Proceso completado", type: "success" });
+      await invoke("open_folder", { path: folderPath });
+    }
   } catch (error) {
     console.error(error);
   }

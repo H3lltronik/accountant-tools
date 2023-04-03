@@ -18,7 +18,7 @@
       openModal({ message: "Selecciona un archivo y una carpeta", title: "Error", type: "error" });
       return;
     }
-    await scripts.handleBeginProccess(selectedFolder, selectedFile);
+    await scripts.handleBeginProcess(selectedFolder, selectedFile);
   };
 
 </script>

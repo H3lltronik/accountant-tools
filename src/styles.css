@@ -30,7 +30,7 @@ body::after {
   height: 100%;
   z-index: -1;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .container {
