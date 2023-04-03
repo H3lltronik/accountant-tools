@@ -1,17 +1,26 @@
 <script lang="ts">
-  import { invoke } from "@tauri-apps/api/tauri";
-  import { open } from "@tauri-apps/api/dialog";
+  import { isModalOpened, openModal } from "@/store/modal.store";
+  import * as scripts from "./DiotBatch";
 
-  async function handleFileClick() {
-    try {
-      const path = await open();
-      if (!path) return;
-      const result = await invoke("excel", { fullPath: path });
-      console.log(result);
-    } catch (error) {
-      console.error(error);
+  let selectedFolder = "";
+  let selectedFile = "";
+
+  const handleSelectFolder = async () => {
+    selectedFolder = await scripts.handleSelectFolder();
+  };
+
+  const handleSelectFile = async () => {
+    selectedFile = await scripts.handleSelectFile();
+  };
+
+  const handleBeginProccess = async () => {
+    if (selectedFolder === "" || selectedFile === "") {
+      openModal({ message: "Selecciona un archivo y una carpeta", title: "Error", type: "error" });
+      return;
     }
-  }
+    await scripts.handleBeginProccess(selectedFolder, selectedFile);
+  };
+
 </script>
 
 <div class="page">
@@ -21,12 +30,19 @@
       >En esta seccion podras convertir tu Excel a un txt listo para ser subido
       al programa
     </span>
-    <a href="https://www.sat.gob.mx/aplicacion/07152/descarga-e-instala-en-tu-equipo-de-computo-el-programa-dim-y-su-anexo-5.">DIOT</a>
+    <a href="https://tramitesdigitales.sat.gob.mx/InformativaDeTerceros.Internet/Login.aspx?ReturnUrl=%2fInformativaDeTerceros.Internet%2fDefault.aspx">DIOT</a>
   </p>
 
   <div class="mt-5"></div>
 
   <p>¿Aun no estas seguro de como hacerlo? Revisa este tutorial</p>
-  <button class="form__button" on:click={handleFileClick}>Elegir archivo</button
-  >
+  {#if selectedFolder !== ""}
+    <p>El archivo se guardara en: {selectedFolder}</p>
+  {/if}
+  {#if selectedFile !== ""}
+    <p>El archivo a convertir es: {selectedFile}</p>
+  {/if}
+  <button class="form__button" on:click={handleSelectFolder}>Elegir destino</button>
+  <button class="form__button" on:click={handleSelectFile}>Elegir archivo</button>
+  <button class="form__button form__button--primary" on:click={handleBeginProccess}>Convertir</button>
 </div>

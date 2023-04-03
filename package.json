@@ -14,7 +14,8 @@
     "@tauri-apps/api": "^1.2.0",
     "svelte-icons-pack": "^2.1.0",
     "svelte-routing": "^1.6.0",
-    "svelte-sheets": "^1.0.0"
+    "svelte-sheets": "^1.0.0",
+    "svelte-simple-modal": "^1.5.2"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.0.0",
