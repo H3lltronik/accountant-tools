@@ -8,9 +8,9 @@
 
 <Router basepath="/" url="{url}">
     <slot></slot>
-    <div>
+    <main class="container">
         {#each routesArray as route}
             <Route path={route.path} component="{route.component}" />
         {/each}
-    </div>
+    </main>
 </Router>

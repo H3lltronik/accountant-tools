@@ -1,0 +1,42 @@
+// Spacing helpers
+@for $i from 0 through 10 {
+    .mt-#{$i} {
+      margin-top: #{$i * 0.5}rem;
+    }
+    .mb-#{$i} {
+      margin-bottom: #{$i * 0.5}rem;
+    }
+    .ml-#{$i} {
+      margin-left: #{$i * 0.5}rem;
+    }
+    .mr-#{$i} {
+      margin-right: #{$i * 0.5}rem;
+    }
+    .pt-#{$i} {
+      padding-top: #{$i * 0.5}rem;
+    }
+    .pb-#{$i} {
+      padding-bottom: #{$i * 0.5}rem;
+    }
+    .pl-#{$i} {
+      padding-left: #{$i * 0.5}rem;
+    }
+    .pr-#{$i} {
+      padding-right: #{$i * 0.5}rem;
+    }
+  }
+  
+  // Z-index helpers
+  @for $i from 1 through 5 {
+    .z-#{$i} {
+      z-index: $i;
+    }
+  }
+  
+  // Font-size helpers
+  @for $i from 1 through 5 {
+    .fs-#{$i} {
+      font-size: #{$i * 0.25}rem;
+    }
+  }
+  
