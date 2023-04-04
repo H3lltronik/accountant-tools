@@ -41,7 +41,7 @@ fn excel_to_diot(file_path: &str, folder_path: &str) -> Result<responses::MyResp
             }),
             notifications: vec![
                 responses::Notification {
-                    notification_type: responses::NotificationType::Error(String::from("error")),
+                    notification_type: responses::NotificationType::Error,
                     title: String::from("Error"),
                     description: String::from("El archivo ya existe"),
                 },
@@ -59,9 +59,9 @@ fn excel_to_diot(file_path: &str, folder_path: &str) -> Result<responses::MyResp
         }),
         notifications: vec![
             responses::Notification {
-                notification_type: responses::NotificationType::Info(String::from("Se creó el archivo correctamente")),
-                title: String::from("Error"),
-                description: String::from("El archivo ya existe"),
+                notification_type: responses::NotificationType::Info,
+                title: String::from("Correcto"),
+                description: String::from("Se creó el archivo correctamente"),
             },
         ],
     };

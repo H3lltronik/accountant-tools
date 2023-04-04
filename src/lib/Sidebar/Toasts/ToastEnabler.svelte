@@ -1,7 +1,6 @@
 <script>
-  import { addToast, toasts } from "@/store/modal.store";
   import { SvelteToast } from "@zerodevx/svelte-toast";
-  import { toast } from "@zerodevx/svelte-toast";
+  import { addToast } from "./toasts";
 
   const options = {
     position: "bottom-right",
@@ -17,10 +16,6 @@
     icon: true,
     rtl: false,
   };
-
-  $: $toasts.forEach((_toast) => {
-    toast.push(_toast.message);
-  });
 </script>
 
 <SvelteToast {options} />

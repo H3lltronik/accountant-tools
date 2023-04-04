@@ -1,4 +1,4 @@
-type ResponseNotificationType = "error" | "success";
+type ResponseNotificationType = "error" | "success" | "info" | "warning";
 
 interface ResponseNotification {
   notification_type: ResponseNotificationType;

@@ -21,6 +21,7 @@ body {
   backdrop-filter: blur(5px);
   position: relative !important;
   margin: 0;
+  overflow: hidden;
 }
 body::after {
   content: '';

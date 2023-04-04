@@ -1,6 +1,7 @@
-import { addToast, openModal } from "@/store/modal.store";
+import { openModal } from "@/store/modal.store";
 import { invoke } from "@tauri-apps/api/tauri";
 import { TAURI_RESPONSE_TYPES } from './common.service'
+import { addToast } from "@/lib/Sidebar/Toasts/toasts";
 
 export const tauriCall = async <T>(command: string, params: any): Promise<TauriCallResponse<T>> => {
   try {
@@ -35,3 +36,5 @@ export const tauriCall = async <T>(command: string, params: any): Promise<TauriC
 
 const isError = (result: any) => result.hasOwnProperty("Error");
 const isSuccess = (result: any) => result.hasOwnProperty("Success");
+const isWarning = (result: any) => result.hasOwnProperty("Warning");
+const isInfo = (result: any) => result.hasOwnProperty("Info");

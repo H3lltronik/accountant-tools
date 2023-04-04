@@ -91,3 +91,14 @@ main {
 h1 {
   margin-top: 0;
 }
+
+// body for a toast
+.toast {
+  &__title {
+    font-size: 20px;
+    font-weight: bolder;
+  }
+  &__body {
+    font-size: 16px;
+  }
+}

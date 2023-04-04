@@ -1,9 +1,13 @@
 export const TAURI_RESPONSE_TYPES: {
     ERROR: ResponseNotificationType;
     SUCCESS: ResponseNotificationType;
+    INFO: ResponseNotificationType;
+    WARNING: ResponseNotificationType;
 } = {
     ERROR: "error",
-    SUCCESS: "success"
+    SUCCESS: "success",
+    INFO: "info",
+    WARNING: "warning",
 }
 
 import { tauriCall } from "./interceptor";

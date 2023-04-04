@@ -27,7 +27,8 @@ pub struct Notification {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum NotificationType {
-    Info(String),
-    Warning(String),
-    Error(String),
+    Info,
+    Success,
+    Warning,
+    Error,
 }
