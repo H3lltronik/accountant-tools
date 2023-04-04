@@ -2,6 +2,7 @@
   import "@/styles/main.scss";
   import Modal from "./lib/Sidebar/Modal/Modal.svelte";
   import Sidebar from "./lib/Sidebar/Sidebar.svelte";
+  import ToastEnabler from "./lib/Sidebar/Toasts/ToastEnabler.svelte";
   import AppRouter from "./router/AppRouter.svelte";
   import AnchorClickInterceptor from "./utils/AnchorClickInterceptor.svelte";
 </script>
@@ -12,3 +13,4 @@
 
 <AnchorClickInterceptor />
 <Modal />
+<ToastEnabler />

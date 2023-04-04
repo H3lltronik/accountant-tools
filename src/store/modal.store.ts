@@ -15,6 +15,8 @@ const defaultModalParams: ModalParams = {
 export const isModalOpened = writable(false);
 export const modalParams = writable(defaultModalParams);
 
+export const toasts = writable<ModalParams[]>([]);
+
 export const openModal = (params: ModalParams) => {
     isModalOpened.set(true);
     modalParams.set(params);
@@ -23,4 +25,10 @@ export const openModal = (params: ModalParams) => {
 export const closeModal = () => {
     isModalOpened.set(false);
     modalParams.set(defaultModalParams);
+}
+
+export const addToast = (params: ModalParams) => {
+    toasts.update((toasts) => {
+        return [...toasts, params];
+    });
 }

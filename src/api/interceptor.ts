@@ -1,4 +1,4 @@
-import { openModal } from "@/store/modal.store";
+import { addToast, openModal } from "@/store/modal.store";
 import { invoke } from "@tauri-apps/api/tauri";
 import { TAURI_RESPONSE_TYPES } from './common.service'
 
@@ -8,7 +8,7 @@ export const tauriCall = async <T>(command: string, params: any): Promise<TauriC
 
     if (notifications) {
         notifications.forEach((notification) => {
-            openModal({
+            addToast({
                 title: notification.title,
                 message: notification.description,
                 type: notification.notification_type
