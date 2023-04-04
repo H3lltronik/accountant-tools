@@ -6,11 +6,14 @@ use std::fs::File;
 use std::io::BufReader;
 use std::io::Write;
 use std::process::Command;
+use std::vec;
 use tauri::regex::Regex;
+
+mod responses;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
-fn excel_to_diot(file_path: &str, folder_path: &str) -> Result<String, String> {
+fn excel_to_diot(file_path: &str, folder_path: &str) -> Result<responses::MyResponse, String> {
     let mut filename = "";
 
     let re =
@@ -28,15 +31,41 @@ fn excel_to_diot(file_path: &str, folder_path: &str) -> Result<String, String> {
     let mut workbook = open_workbook_auto(file_path).unwrap();
     let tab_file_path = folder_path.to_owned() + filename + "[DIOT].txt";
 
-    // checking if tab_file_path exists
-    // if it does, panic
+    
+
     if std::path::Path::new(&tab_file_path).exists() {
-        return Err(String::from("El archivo ya existe"));
+        let response = responses::MyResponse {
+            result: responses::ResponseType::Error(responses::Result {
+                message: String::from("El archivo ya existe"),
+                payload: Option::Some(String::from("El archivo ya existe")),
+            }),
+            notifications: vec![
+                responses::Notification {
+                    notification_type: responses::NotificationType::Error(String::from("error")),
+                    title: String::from("Error"),
+                    description: String::from("El archivo ya existe"),
+                },
+            ],
+        };
+        return Ok(response);
     }
 
     xlsx_to_tab_delimited(&mut workbook, &tab_file_path).unwrap();
 
-    Ok(String::from("ok"))
+    let response = responses::MyResponse {
+        result: responses::ResponseType::Success(responses::Result {
+            message: String::from("Se creó el archivo correctamente"),
+            payload: None,
+        }),
+        notifications: vec![
+            responses::Notification {
+                notification_type: responses::NotificationType::Info(String::from("Se creó el archivo correctamente")),
+                title: String::from("Error"),
+                description: String::from("El archivo ya existe"),
+            },
+        ],
+    };
+    Ok(response)
 }
 
 #[tauri::command]

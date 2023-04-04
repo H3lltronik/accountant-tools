@@ -1,6 +1,7 @@
-import { invoke } from "@tauri-apps/api/tauri";
 import { open } from "@tauri-apps/api/dialog";
 import { openModal } from "@/store/modal.store";
+import { excelToDiotTxt } from "@/api/batchDiot.service";
+import { TAURI_RESPONSE_TYPES, openDirectory } from "@/api/common.service";
 
 export const handleSelectFolder = async () => {
   try {
@@ -29,11 +30,11 @@ export const handleSelectFile = async () => {
 
 export const handleBeginProcess = async (folderPath, filePath) => {
   try {
-    const result = await invoke("excel_to_diot", { filePath, folderPath });
+    const result = await excelToDiotTxt(filePath, folderPath);
     console.log(result);
-    if (result == "ok") {
+    if (result.type == TAURI_RESPONSE_TYPES.SUCCESS) {
       openModal({ title: "Success", message: "Proceso completado", type: "success" });
-      await invoke("open_folder", { path: folderPath });
+      await openDirectory(folderPath);
     }
   } catch (error) {
     console.error(error);

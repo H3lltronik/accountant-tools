@@ -14,7 +14,7 @@
     <i>
         <Icon src={HiSolidUpload} title="Carga batch"/>
     </i>
-    <h3>{message}</h3>
+    <h2>{message}</h2>
 </div>
 <nav>
     <button class="form__button" on:click={doClosePopup}>Cerrar</button>
@@ -27,7 +27,7 @@
         align-items: center;
         justify-content: flex-start;
     }
-    h3 {
+    h2 {
         margin: 0;
         margin-left: 10px;
     }
@@ -35,7 +35,7 @@
         margin-top: 20px;
     }
     i {
-        font-size: 30px;
+        font-size: 40px;
     }
 
 </style>
