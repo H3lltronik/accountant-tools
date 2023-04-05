@@ -1,4 +1,4 @@
-import DiotBatchUpload from '@/pages/DiotBatch/DiotBatch.svelte';
+import DiotBatchUpload from '@/modules/DiotBatch/DiotBatch.svelte';
 
 export const routes = {
     batchUpload: {
