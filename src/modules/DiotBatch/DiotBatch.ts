@@ -1,4 +1,4 @@
-import { open } from "@tauri-apps/api/dialog";
+import { open, type OpenDialogOptions } from "@tauri-apps/api/dialog";
 import { openModal } from "@/store/modal.store";
 import { excelToDiotTxt } from "@/api/batchDiot.service";
 import { TAURI_RESPONSE_TYPES, openDirectory } from "@/api/common.service";
@@ -17,10 +17,9 @@ export const handleSelectFolder = async () => {
   }
 };
 
-export const handleSelectFile = async () => {
+export const handleSelectFile = async (options: OpenDialogOptions) => {
   try {
-    const filters = [{ name: 'Excel Files', extensions: ['xlsx', 'xls'] }];
-    const selectedFile = (await open({ filters })) as string;
+    const selectedFile = (await open(options)) as string;
     if (!selectedFile) return;
     return selectedFile;
   } catch (error) {

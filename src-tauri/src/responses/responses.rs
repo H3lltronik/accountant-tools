@@ -32,3 +32,4 @@ pub enum NotificationType {
     Warning,
     Error,
 }
+

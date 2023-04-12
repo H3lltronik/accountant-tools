@@ -10,7 +10,8 @@
   };
 
   const handleSelectFile = async () => {
-    selectedFile = await scripts.handleSelectFile();
+    const filters = [{ name: 'Excel Files', extensions: ['xlsx', 'xls'] }];
+    selectedFile = await scripts.handleSelectFile({ filters });
   };
 
   const handleBeginProccess = async () => {
