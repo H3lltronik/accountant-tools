@@ -1,8 +1,8 @@
 <script>
     import { Router, Link, Route } from "svelte-routing";
-    import { routes } from "./routes";
+    import { routes } from "@/router/routes";
 
-    const routesArray = Object.keys(routes).map((key) => routes[key]);
+    const routesArray = Object.values(routes);;
     export let url = "";
 </script>
 

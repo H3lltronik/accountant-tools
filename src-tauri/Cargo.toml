@@ -21,6 +21,8 @@ base64 = "0.21.0"
 anyhow = "1.0.70"
 data-encoding = "2.3.3"
 thiserror = "1.0.40"
+lazy_static = "1.4.0"
+chrono = "0.4.19"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

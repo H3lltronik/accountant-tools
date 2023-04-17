@@ -44,10 +44,12 @@
     "windows": [
       {
         "fullscreen": false,
-        "resizable": false,
+        "resizable": true,
         "title": "Herramienta de contadores",
         "width": 1000,
-        "height": 700
+        "height": 700,
+        "minHeight": 500,
+        "minWidth": 600
       }
     ]
   }

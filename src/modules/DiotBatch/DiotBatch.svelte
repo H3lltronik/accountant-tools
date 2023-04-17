@@ -1,28 +1,48 @@
 <script lang="ts">
   import { isModalOpened, openModal } from "@/store/modal.store";
   import * as scripts from "./DiotBatch";
+  import TutorialModal from "./TutorialModal.svelte";
 
   let selectedFolder = "";
-  let selectedFile = "";
+  let selectedFiles: string[] = [];
+  let selectedFilesString = "";
 
   const handleSelectFolder = async () => {
     selectedFolder = await scripts.handleSelectFolder();
   };
 
-  const handleSelectFile = async () => {
+  const handleSelectFile = async (append: Boolean) => {
     const filters = [{ name: 'Excel Files', extensions: ['xlsx', 'xls'] }];
-    selectedFile = await scripts.handleSelectFile({ filters });
+    const _selectedFiles = await scripts.handleSelectFile({ filters, multiple: true }) as string[];
+
+    if (append) {
+      selectedFiles = [...selectedFiles, ..._selectedFiles];
+    } else {
+      selectedFiles = _selectedFiles;
+    }
+    
+    if (Array.isArray(_selectedFiles)) {
+      selectedFilesString = selectedFiles.join(',');
+    }
+    console.log("selectedFiles", selectedFiles)
   };
 
   const handleBeginProccess = async () => {
-    if (selectedFolder === "" || selectedFile === "") {
+    if (selectedFolder === "" || selectedFilesString === ""  || selectedFolder === null || selectedFilesString === null || 
+        selectedFolder === undefined || selectedFilesString === undefined) {
       openModal({ message: "Selecciona un archivo y una carpeta", title: "Error", type: "error" });
       return;
     }
-    await scripts.handleBeginProcess(selectedFolder, selectedFile);
+    await scripts.handleBeginProcess(selectedFolder, selectedFilesString);
   };
 
+
+  let showTutorial = false;
+  const toggleTutorial = () => { showTutorial = !showTutorial }
+
 </script>
+
+<TutorialModal isOpen={showTutorial} on:close={toggleTutorial} />
 
 <div class="page">
   <h1>Carga batch DIOT</h1>
@@ -36,14 +56,25 @@
 
   <div class="mt-5"></div>
 
-  <p>¿Aun no estas seguro de como hacerlo? Revisa este tutorial</p>
-  {#if selectedFolder !== ""}
+  <p>¿Aun no estas seguro de como hacerlo? Revisa <button on:click={toggleTutorial} class="inline-btn">este tutorial</button></p>
+  {#if selectedFolder !== "" && selectedFolder !== null && selectedFolder !== undefined }
     <p>El archivo se guardara en: {selectedFolder}</p>
   {/if}
-  {#if selectedFile !== ""}
-    <p>El archivo a convertir es: {selectedFile}</p>
+  {#if selectedFiles !== undefined && selectedFiles !== null && selectedFiles.length > 0}
+    <p>Los archivos a convertir son:</p>
+    <ul>
+      {#each selectedFiles as file}
+        <li>{file}</li>
+      {/each}
+    </ul>
   {/if}
   <button class="form__button" on:click={handleSelectFolder}>Elegir destino</button>
-  <button class="form__button" on:click={handleSelectFile}>Elegir archivo</button>
+  <button class="form__button" on:click={() => handleSelectFile(false)}>Elegir archivo</button>
+
+  {#if selectedFiles.length > 0}
+    <button class="form__button" on:click={() => handleSelectFile(true)}>Añadir archivos</button>
+  {/if}
+    
+
   <button class="form__button form__button--primary" on:click={handleBeginProccess}>Convertir</button>
 </div>

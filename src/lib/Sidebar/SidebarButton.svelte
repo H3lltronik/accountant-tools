@@ -12,7 +12,7 @@
 
 </script>
 
-<button on:click={dispatchClick} class={styles.sidebar__header__button}>
+<button on:click={dispatchClick} class={`form__button ${styles.sidebar__header__button}`}>
   <Icon
     src={$isSidebarOpened? HiOutlineCross : AiOutlineMenu}
     title="Alternar menú"

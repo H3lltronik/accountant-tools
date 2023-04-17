@@ -1,8 +1,10 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+mod globals;
 mod responses;
 mod diot_file;
 mod excel_differ;
+use std::env;
 
 use std::process::Command;
 
@@ -45,6 +47,8 @@ fn test () {
 
 fn main() {
     test(); 
+    env::set_var(globals::DIOT_EXCEL_SHEET_NAME.name, globals::DIOT_EXCEL_SHEET_NAME.value);
+
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![excel_to_diot, open_folder])
         .run(tauri::generate_context!())

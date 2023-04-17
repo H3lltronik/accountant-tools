@@ -19,15 +19,21 @@ export const handleSelectFolder = async () => {
 
 export const handleSelectFile = async (options: OpenDialogOptions) => {
   try {
-    const selectedFile = (await open(options)) as string;
-    if (!selectedFile) return;
-    return selectedFile;
+    const selectedFiles = (await open(options)) as string | string[];
+    if (!selectedFiles) return;
+    if (Array.isArray(selectedFiles)) {
+      return selectedFiles;
+    } else {
+      return selectedFiles as string;
+    }
   } catch (error) {
     console.error(error);
   }
 };
 
+
 export const handleBeginProcess = async (folderPath, filePath) => {
+  console.log(folderPath, filePath);
   try {
     const result = await excelToDiotTxt(filePath, folderPath);
     console.log(result);
