@@ -1,0 +1,9 @@
+(function () {
+    Array.from(document.querySelectorAll("#BtnRI")).forEach(el => {
+        window.open("https://portalcfdi.facturaelectronica.sat.gob.mx/RepresentacionImpresa.aspx?Datos="+el.onclick.toString().match(/recuperaRepresentacionImpresa\('([a-zA-Z=\/0-9\+]+)/)[1]);
+    });
+    
+    Array.from(document.querySelectorAll("#BtnDescarga")).forEach(el => {
+        window.open("https://portalcfdi.facturaelectronica.sat.gob.mx/RecuperaCfdi.aspx?"+el.onclick.toString().match(/(Datos[a-zA-Z=\/0-9\+]+)/)[0]);
+    });
+})()

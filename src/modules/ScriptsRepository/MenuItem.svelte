@@ -8,7 +8,7 @@
   import HiIcon from "svelte-icons-pack/hi/HiSolidInbox";
 </script>
 
-<Link to={routes.batchUpload.path} class={styles.content__item}>
+<Link to={routes.scriptsRepository.path} class={styles.content__item}>
   <div class={styles.content__item__icon}>
     <Icon src={HiIcon} title="Repositorio de scripts" />
   </div>
