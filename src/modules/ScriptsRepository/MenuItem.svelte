@@ -1,4 +1,5 @@
 <script>
+  // @ts-nocheck
   import { Link } from "svelte-routing";
   import styles from "@/lib/Sidebar/Sidebar.module.scss";
 
@@ -8,7 +9,7 @@
   import HiIcon from "svelte-icons-pack/hi/HiSolidInbox";
 </script>
 
-<Link to={routes.scriptsRepository.path} class={styles.content__item}>
+<Link to={routes.scriptsRepository.path} class={styles.content__item} data-type="route_link">
   <div class={styles.content__item__icon}>
     <Icon src={HiIcon} title="Repositorio de scripts" />
   </div>

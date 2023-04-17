@@ -5,16 +5,18 @@
     const routesArray = Object.values(routes);;
     export let url = "";
 
-    const handleClick = function () {
+    const onRouteChange = function () {
         alert("as")
     }
+
+    
 </script>
 
-<Router basepath="/" url="{url}">
+<Router basepath="/" url="{url}" on:routechange="{onRouteChange}">
     <slot></slot>
     <main class="container">
         {#each routesArray as route}
-            <Route path={route.path} component="{route.component}" on:click={handleClick} />
+            <Route path={route.path} component="{route.component}" />
         {/each}
     </main>
 </Router>

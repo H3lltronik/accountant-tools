@@ -39,7 +39,8 @@
 <div class="page">
   <h2>Descarga masiva</h2>
   <hr />
-  <pre><code class="language-javascript">{massiveDownloadScript}</code></pre>
+  <!-- <pre><code class="language-javascript">{massiveDownloadScript}</code></pre> -->
+  <div class="">{massiveDownloadScript}</div>
 
     <button on:click={() => copyToClipboard(massiveDownloadScript)} class="form__button form__button--primary">
         Copiar

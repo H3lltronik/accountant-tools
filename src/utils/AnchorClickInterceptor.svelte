@@ -6,7 +6,10 @@
       const { target } = event;
       if (target.tagName === 'A') {
         event.preventDefault();
-        open(target.href);
+        // If the target has data-type="route_link", it's a link to a route, then dont open it in the browser
+        if (target.dataset.type !== 'route_link') {
+          open(target.href);
+        }
       }
     }
   
