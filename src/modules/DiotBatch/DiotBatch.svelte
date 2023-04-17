@@ -8,7 +8,7 @@
   let selectedFilesString = "";
 
   const handleSelectFolder = async () => {
-    selectedFolder = await scripts.handleSelectFolder();
+    selectedFolder = await scripts.handleSelectFolder("Selecciona la carpeta donde se guardaran los archivos");
   };
 
   const handleSelectFile = async (append: Boolean) => {
@@ -16,7 +16,7 @@
     const _selectedFiles = await scripts.handleSelectFile({ filters, multiple: true }) as string[];
 
     if (append) {
-      selectedFiles = [...selectedFiles, ..._selectedFiles];
+      selectedFiles = Array.from(new Set([...selectedFiles, ..._selectedFiles]));
     } else {
       selectedFiles = _selectedFiles;
     }
@@ -24,10 +24,9 @@
     if (Array.isArray(_selectedFiles)) {
       selectedFilesString = selectedFiles.join(',');
     }
-    console.log("selectedFiles", selectedFiles)
   };
 
-  const handleBeginProccess = async () => {
+  const handleBeginProcess = async () => {
     if (selectedFolder === "" || selectedFilesString === ""  || selectedFolder === null || selectedFilesString === null || 
         selectedFolder === undefined || selectedFilesString === undefined) {
       openModal({ message: "Selecciona un archivo y una carpeta", title: "Error", type: "error" });
@@ -76,5 +75,5 @@
   {/if}
     
 
-  <button class="form__button form__button--primary" on:click={handleBeginProccess}>Convertir</button>
+  <button class="form__button form__button--primary" on:click={handleBeginProcess}>Convertir</button>
 </div>

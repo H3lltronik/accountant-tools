@@ -3,11 +3,12 @@ import { openModal } from "@/store/modal.store";
 import { excelToDiotTxt } from "@/api/batchDiot.service";
 import { TAURI_RESPONSE_TYPES, openDirectory } from "@/api/common.service";
 
-export const handleSelectFolder = async () => {
+export const handleSelectFolder = async (title) => {
   try {
     const selectedFolder = (await open({
       directory: true,
       multiple: false,
+      title,
     })) as string;
     if (!selectedFolder) return;
 

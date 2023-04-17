@@ -1,5 +1,8 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
+    import { invoke } from '@tauri-apps/api/tauri'
+    import * as scripts from "./DiotBatch";
+  import { openDirectory } from '@/api/common.service';
     
     export let isOpen = false;
     
@@ -16,14 +19,12 @@
       }
     }
 
-    function downloadTemplate() {
-      const link = document.createElement('a');
-      link.href = '/assets/diot_template.xlsx';
-      link.setAttribute('download', 'diot_template.xlsx');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    
+    async function downloadTemplate() {
+      const destination = await scripts.handleSelectFolder("Selecciona la carpeta de destino")
+      const fullDestination = destination + "\\diot_template.xlsx";
+      const source = ".\\src\\assets\\diot_template.xlsx";
+      await invoke('copy_file', { source, destination: fullDestination });    
+      await openDirectory(destination);
     }
   </script>
   

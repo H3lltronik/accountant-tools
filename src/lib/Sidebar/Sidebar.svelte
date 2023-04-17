@@ -7,8 +7,6 @@
   import { routes } from "@/router/routes";
 
   const sidebarItems = Object.values(routes);
-  console.log("sidebarItems", sidebarItems)
-
 </script>
 
 <div class={`${styles.sidebar} ${$isSidebarOpened? '' : styles['sidebar--shrunk']}`}>
