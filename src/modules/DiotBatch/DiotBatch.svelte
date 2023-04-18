@@ -2,6 +2,7 @@
   import { isModalOpened, openModal } from "@/store/modal.store";
   import * as scripts from "./DiotBatch";
   import TutorialModal from "./TutorialModal.svelte";
+  import PageLayout from "@/lib/Layout/PageLayout.svelte";
 
   let selectedFolder = "";
   let selectedFiles: string[] = [];
@@ -43,8 +44,7 @@
 
 <TutorialModal isOpen={showTutorial} on:close={toggleTutorial} />
 
-<div class="page">
-  <h1>Carga batch DIOT</h1>
+<PageLayout title="Carga batch DIOT">
   <p>
     <span
       >En esta seccion podras convertir tu Excel a un txt listo para ser subido
@@ -76,4 +76,4 @@
     
 
   <button class="form__button form__button--primary" on:click={handleBeginProcess}>Convertir</button>
-</div>
+</PageLayout>

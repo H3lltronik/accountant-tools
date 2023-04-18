@@ -2,6 +2,8 @@
   import hljs from "highlight.js";
   import massiveDownloadLocation from "./massiveDownloadScript.txt";
   import { addToast } from "@/lib/Sidebar/Toasts/toasts";
+  import PageLayout from "@/lib/Layout/PageLayout.svelte";
+  import {tauri} from "@tauri-apps/api";
   let massiveDownloadScript = "";
 
   fetch(massiveDownloadLocation)
@@ -36,14 +38,17 @@
   }
 </script>
 
-<div class="page">
-  <h2>Descarga masiva</h2>
+<PageLayout title="Repositorio de scripts">
+  <h3>
+    <span>En esta seccion encontraras un conjunto de scripts en Javascript para ser usados en el navegador</span>
+  </h3>
+
+  <div class="mt-5"></div>
   <hr />
   <!-- <pre><code class="language-javascript">{massiveDownloadScript}</code></pre> -->
   <div class="">{massiveDownloadScript}</div>
 
-    <button on:click={() => copyToClipboard(massiveDownloadScript)} class="form__button form__button--primary">
-        Copiar
-    </button>
-    
-</div>
+  <button on:click={() => copyToClipboard(massiveDownloadScript)} class="form__button form__button--primary">
+      Copiar
+  </button>
+</PageLayout>

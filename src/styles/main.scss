@@ -6,72 +6,49 @@
     font-size: 1em;
     cursor: pointer;
     font-weight: 500;
-    color: #0f0f0f;
     border-radius: 8px;
     padding: 0.6em 1.2em;
     font-family: inherit;
-    background-color: #ffffff;
+    color: var(--button-secondary-color);
+    background-color: var(--button-secondary-background);
     border: 1px solid transparent;
-    transition: border-color 0.25s;
+    transition: all 0.25s;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 
+    path {
+      fill: var(--button-secondary-color);
+    }
     &:hover {
-      border-color: #396cd8;
+      color: var(--button-secondary-hover-color);
+      background-color: var(--button-secondary-hover-background);
+      path {
+        fill: var(--button-primary-hover-color);
+      }
     }
     &:active {
-      border-color: #396cd8;
-      background-color: #e8e8e8;
     }
 
     &--primary {
-      background-color: #396cd8;
-      color: #ffffff;
-      border-color: #396cd8;
+      background-color: var(--button-primary-background);
+      color: var(--button-primary-color);
+      path {
+        fill: var(--button-primary-color);
+      }
       &:hover {
-        background-color: #2e5bb8;
-        border-color: #2e5bb8;
+        color: var(--button-primary-hover-color);
+        background-color: var(--button-primary-hover-background);
+        path {
+          fill: var(--button-primary-hover-color);
+        }
       }
       &:active {
-        background-color: #2e5bb8;
-        border-color: #2e5bb8;
+        background-color: var(--button-primary-hover-background);
       }
     }
   }
 
   &__label {
     
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .form {
-    &__button {
-      background-color: #0f0f0f;
-      color: #ffffff;
-      border-color: #0f0f0f;
-      &:hover {
-        background-color: #1a1a1a;
-        border-color: #1a1a1a;
-      }
-      &:active {
-        background-color: #1a1a1a;
-        border-color: #1a1a1a;
-      }
-
-      &--primary {
-        background-color: #396cd8;
-        color: #ffffff;
-        border-color: #396cd8;
-        &:hover {
-          background-color: #2e5bb8;
-          border-color: #2e5bb8;
-        }
-        &:active {
-          background-color: #2e5bb8;
-          border-color: #2e5bb8;
-        }
-      }
-    }
   }
 }
 
