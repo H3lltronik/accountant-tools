@@ -15,7 +15,8 @@
   --color-text-title: #2c3c3c;
   --color-text-body: #fff;
   --hr-color: #eaeaea;
-
+  --header-background-color: #fff;
+  --header-text-color: #000;
 
   --button-primary-color: #fff;
   --button-primary-background: #535bf2;
@@ -51,6 +52,8 @@
     --color-text-title: #fff;
     --color-text-body: #fff;
     --hr-color: #eaeaea;
+    --header-background-color: #000;
+    --header-text-color: #fff;
 
     --button-primary-color: #fff;
     --button-primary-background: #535bf2;

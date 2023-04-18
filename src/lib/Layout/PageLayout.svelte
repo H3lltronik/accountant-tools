@@ -1,7 +1,7 @@
 <script>
     import styles from './PageLayout.module.scss';
     import Icon from "svelte-icons-pack/Icon.svelte";
-    import HiSolidUpload from "svelte-icons-pack/hi/HiSolidUpload";
+    import HiIcon from "svelte-icons-pack/hi/HiSolidCog";
 
     export let title = '';
 </script>
@@ -15,7 +15,9 @@
         <nav class={styles.page__header__options}>
             <ul>
                 <li>
-                    <Icon src={HiSolidUpload} title="Carga batch" />
+                    <button>
+                        <Icon src={HiIcon} title="Carga batch" />
+                    </button>
                 </li>
             </ul>
         </nav>
