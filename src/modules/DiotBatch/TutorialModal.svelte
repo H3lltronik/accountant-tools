@@ -22,7 +22,7 @@
     async function downloadTemplate() {
       const destination = await scripts.handleSelectFolder("Selecciona la carpeta de destino")
       const fullDestination = destination + "\\diot_template.xlsx";
-      const source = ".\\src\\assets\\diot_template.xlsx";
+      const source = ".\\assets\\diot_template.xlsx";
       await invoke('copy_file', { source, destination: fullDestination });    
       await openDirectory(destination);
     }

@@ -9,7 +9,7 @@
 <div class={styles.page}>
     <header class={styles.page__header}>
         <div class={styles.page__header__title}>
-            <h1 class={styles.page__title}>{title}</h1>
+            <h1 tabindex="-1" class={styles.page__title}>{title}</h1>
         </div>
 
         <nav class={styles.page__header__options}>

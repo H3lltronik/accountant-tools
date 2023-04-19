@@ -37,7 +37,7 @@ fn copy_file(source: &str, destination: &str) {
             Err(err) => println!("{}", err),
         };
     }
-    #[cfg(target_os = "macos")]
+    #[cfg(target_os = "macos")] 
     {
         let source = "./assets/diot_example.xlsx";
         let destination = format!("{}/Downloads/diot_example.xlsx", std::env::var("HOME").unwrap());

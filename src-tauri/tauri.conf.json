@@ -34,7 +34,10 @@
         "icons/icon.ico"
       ],
       "identifier": "com.h3lltronik.accountants-tools-app",
-      "targets": "all"
+      "targets": "all",
+      "resources": [
+        "./assets"
+      ]
     },
     "security": {
       "csp": null
