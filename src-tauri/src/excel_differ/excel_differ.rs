@@ -17,18 +17,16 @@ fn get_cell_equivalence_value<'a>(row: &'a utils::Row, column: &str) -> Option<&
 }
 
 pub fn excel_differ(file1_path: &str, file2_path: &str, equivalences: Vec<Equivalence>) -> Result<String> {
-    let file1 = utils::load_excel_file(file1_path)?;
+    let mut file1 = utils::load_excel_file(file1_path)?;
     let file2 = utils::load_excel_file(file2_path)?;
 
-    print!("File 1: {}", file1);
-    print!("File 2: {}", file2);
-
     for (_, equivalence) in equivalences.iter().enumerate() {
-        for (_, row) in file1.rows.iter().enumerate() {
+        for (_, row) in file1.rows.iter_mut().enumerate() {
             let equivalence1_value = match get_cell_equivalence_value(&row, &equivalence.column1) {
                 Some(value) => value,
                 None => continue,
             };
+            let mut found_in_reference = false;
 
             for (_, row2) in file2.rows.iter().enumerate() {
                 let equivalence2_value = match get_cell_equivalence_value(&row2, &equivalence.column2) {
@@ -38,13 +36,16 @@ pub fn excel_differ(file1_path: &str, file2_path: &str, equivalences: Vec<Equiva
 
                 if equivalence1_value == equivalence2_value {
                     println!("{} == {}", equivalence1_value, equivalence2_value);
+                    found_in_reference = true;
+                } else {
+                    println!("{} != {}", equivalence1_value, equivalence2_value);
                 }
-
-                println!("{} != {}", equivalence1_value, equivalence2_value);
             }
+            row.found_in_reference = found_in_reference;
         }
     }
 
-
+    print!("File 1: {}", file1);
+    print!("File 2: {}", file2);
     Ok(String::from("Hola"))
 }

@@ -13,7 +13,7 @@ impl fmt::Display for ExcelFile {
         writeln!(f, "Name: {}", self.name)?;
         writeln!(f, "Qnt of rows: {}", self.rows.len())?;
         for row in &self.rows {
-            writeln!(f, "Row Number: {}", row.row_number)?;
+            writeln!(f, "Row Number: {}, Found in reference: {}", row.row_number, row.found_in_reference)?;
             for cell in &row.cells {
                 writeln!(f, "Column: {}, Value: {}", cell.column, cell.value)?;
             }
@@ -25,11 +25,17 @@ impl fmt::Display for ExcelFile {
 pub struct Row {
     pub row_number: i32,
     pub cells: Vec<Cell>,
+    pub found_in_reference: bool,
 }
 
 pub struct Cell {
     pub column: String,
     pub value: String,
+}
+
+pub struct File {
+    pub name: String,
+    pub rows: Vec<Row>,
 }
 
 fn col_index_to_column(index: usize) -> String {
@@ -88,6 +94,7 @@ pub fn load_excel_file(path: &str) -> Result<ExcelFile> {
 
         excel_file.rows.push(Row {
             row_number: row_idx as i32,
+            found_in_reference: false,
             cells,
         });
     }
