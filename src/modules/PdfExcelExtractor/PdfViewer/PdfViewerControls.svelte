@@ -18,7 +18,9 @@
   store.workingColumnIdx.subscribe(() => {
     selectedColumn = store.getSelectedColumn();
   });
+  let columns = [];
   store.columns.subscribe(() => {
+    columns = get(store.columns);
     selectedColumn = store.getSelectedColumn();
   });
 
@@ -56,6 +58,7 @@
       <span>Terminar</span>
     </button>
   </div>
+
   {#if selectedColumn !== null && selectedColumn !== undefined}
     <div class={`${styles.pdf_extractor_controls} ${styles.pdf_extractor_controls__text}`}>
       <div>
@@ -65,26 +68,31 @@
         </strong>
       </div>
     </div>
+
+    <div class={styles.pdf_extractor_controls__text}>Filas: {selectedColumn.values.length}</div>
   {/if}
+
 </div>
 
-<div class={styles.html_file_controls}>
-  <button class="form__button form__button--smaller" on:click={scripts.zoomIn}>
-    <Icon src={HiSolidZoomIn} title="Zoom in" />
-    <span>Zoom In</span>
-  </button>
-  <button
-    class="form__button form__button--smaller"
-    on:click={scripts.restartZoom}
-  >
-    <Icon src={HiSolidZoomOut} title="Zoom Restart" />
-    <span>Reiniciar Zoom</span>
-  </button>
-  <button
-    class="form__button form__button--smaller form__button--danger"
-    on:click={handleGoBack}
-  >
-    <Icon src={HiSolidExit} title="Terminar extraccion" />
-    <span>Regresar</span>
-  </button>
+<div class={styles.html_file_controls__container}>
+  <div class={styles.html_file_controls}>
+    <button class="form__button form__button--smaller" on:click={scripts.zoomIn}>
+      <Icon src={HiSolidZoomIn} title="Zoom in" />
+      <span>Zoom In</span>
+    </button>
+    <button
+      class="form__button form__button--smaller"
+      on:click={scripts.restartZoom}
+    >
+      <Icon src={HiSolidZoomOut} title="Zoom Restart" />
+      <span>Reiniciar Zoom</span>
+    </button>
+    <button
+      class="form__button form__button--smaller form__button--danger"
+      on:click={handleGoBack}
+    >
+      <Icon src={HiSolidExit} title="Terminar extraccion" />
+      <span>Regresar</span>
+    </button>
+  </div>
 </div>

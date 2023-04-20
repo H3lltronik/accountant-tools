@@ -10,7 +10,6 @@
   let columns = [];
 
   store.columns.subscribe((value) => {
-    console.log("updating columns")
     columns = value;
   });
 
@@ -50,7 +49,6 @@
       if (event.key === "Enter") {
         event.preventDefault();
         const newName = nameEl.textContent.trim();
-        console.log(newName);
         if (newName && newName !== oldName) {
           store.editColumn(columnId, newName);
         }
@@ -60,7 +58,6 @@
 
     nameEl.addEventListener("blur", (event) => {
       const newName = nameEl.textContent.trim();
-      console.log(newName);
       if (newName && newName !== oldName) {
         store.editColumn(columnId, newName);
       }
