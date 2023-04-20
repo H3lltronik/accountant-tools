@@ -43,7 +43,8 @@
       "identifier": "com.h3lltronik.accountants-tools-app",
       "targets": "all",
       "resources": [
-        "./assets"
+        "./assets",
+        "./binaries/pdf2htmlEX/data"
       ]
     },
     "security": {

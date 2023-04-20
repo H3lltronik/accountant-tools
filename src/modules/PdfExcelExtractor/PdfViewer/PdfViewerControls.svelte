@@ -87,7 +87,7 @@
     <span>Atajos:</span>
     {#each columns as column, i}
       <div class={styles.pdf_extractor_controls__text} style={`background-color: ${column.color.backgroundColor}; color: ${column.color.textColor}`}>
-        [{i+1}] {column.name}
+        [{i+1}] {column.name} ({column.values.length})
       </div>
     {/each}
   {/if}

@@ -50,8 +50,10 @@ const handleValueClick = (e: MouseEvent) => {
   const elementValue = target.innerText;
 
   if (target.hasAttribute("data-id")) {
+    const deleted = store.removeValue(target.getAttribute("data-id"));
+    console.log(deleted);
+    if (!deleted) return;
     target.removeAttribute("data-id");
-    store.removeValue(target.getAttribute("data-id"));
     target.style.backgroundColor = "transparent";
     target.style.color = "initial";
     return;
@@ -149,9 +151,6 @@ export const enableNumberShortcuts = () => {
   document.addEventListener("keydown", (event) => {
     if (event.key >= "1" && event.key <= "9") {
       const number = parseInt(event.key);
-
-      console.log("number", number)
-      console.log("columns", get(store.columns).length)
 
       if (number > get(store.columns).length + 1) return;
 

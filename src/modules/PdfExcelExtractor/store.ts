@@ -62,7 +62,10 @@ export const editColumn = (columnId: String, name: String) => {
     });
 }
 
-export const removeColumn = (columnId: String) => {
+export const removeColumn = (columnId: String): Boolean => {
+    const columnIdx = get(columns).findIndex((column) => column.id === columnId);
+    if (!columnIdx) return false;
+
     columns.update((cols) => cols.filter((column) => column.id !== columnId));
     
     if ( get(columns).length === 0 ) {
@@ -73,7 +76,6 @@ export const removeColumn = (columnId: String) => {
         selectColumn(get(columns)[0].id);
     }
 
-    console.log('removing column', columnId)
     const elements = document.querySelectorAll(`[data-column-id="${columnId}"]`);
     elements.forEach((element: any) => {
         element.style.removeProperty('background-color');
@@ -81,7 +83,7 @@ export const removeColumn = (columnId: String) => {
         element.removeAttribute('data-column-id');
     });
 
-
+    return true;
 }
 
 
@@ -107,15 +109,23 @@ export const makeValue = (value: String) => {
     return newValue;
 }
 
-export const removeValue = (valueId: String) => {
+export const removeValue = (valueId: String): Boolean => {
     const columnIdx = get(workingColumnIdx);
-    const columnItems = get(columns)[columnIdx];
-    if (columnIdx < 0 || columnItems === undefined) return;
+    const column = get(columns);
+
+    const valueColumn = column.find((column) => column.values.find((value) => value.id === valueId));
+    if (valueColumn === undefined || valueColumn.id !== column[columnIdx].id) return false;
+
+    const columnItems = column[columnIdx];
+
+    if (columnIdx < 0 || columnItems === undefined) return false;
 
     columns.update((cols) => {
         cols[columnIdx].values = cols[columnIdx].values.filter((value) => value.id !== valueId);
         return cols;
     });
+
+    return true;
 }
 
 export const undoLastAction = () => {
