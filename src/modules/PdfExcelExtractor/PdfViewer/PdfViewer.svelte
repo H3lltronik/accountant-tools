@@ -25,6 +25,7 @@
     scripts.wrapTextNodes(document.getElementById("page-container"));
 
     setTimeout(() => store.makeColumn("Default"), 1000);
+    setTimeout(() => store.makeColumn("Test 2"), 1000);
   });
 
   

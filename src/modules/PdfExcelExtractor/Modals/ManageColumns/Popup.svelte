@@ -28,7 +28,10 @@
     store.selectColumn(columnId);
   };
 
-  const handleRemoveColumn = (e) => {
+  const handleRemoveColumn = async (e) => {
+    const confirm = await window.confirm("¿Estas seguro de que deseas eliminar esta columna? Las filas añadidas no se podran recuperar");
+    if (!confirm) return;
+
     const column = e.target.closest(".column");
     const columnId = column.dataset.columnId;
     store.removeColumn(columnId);

@@ -52,19 +52,19 @@
       <span>Definir columnas</span>
     </button>
     <button
-      class="form__button form__button--smaller"
+      class="form__button form__button--primary form__button--smaller"
       on:click={handlePreview}
     >
       <Icon src={HiSolidEye} title="Ver progreso" />
       <span>Ver progreso</span>
     </button>
-    <button
+    <!-- <button
       class="form__button form__button--smaller form__button--primary"
       on:click={handleGoBack}
     >
       <Icon src={HiSolidFinish} title="Terminar extraccion" />
       <span>Terminar</span>
-    </button>
+    </button> -->
   </div>
 
   {#if selectedColumn !== null && selectedColumn !== undefined}

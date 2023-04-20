@@ -64,6 +64,24 @@ export const editColumn = (columnId: String, name: String) => {
 
 export const removeColumn = (columnId: String) => {
     columns.update((cols) => cols.filter((column) => column.id !== columnId));
+    
+    if ( get(columns).length === 0 ) {
+        workingColumnIdx.set(-1);
+        document.documentElement.style.removeProperty('--working-column-background-color');
+        document.documentElement.style.removeProperty('--working-column-text-color');
+    } else {
+        selectColumn(get(columns)[0].id);
+    }
+
+    console.log('removing column', columnId)
+    const elements = document.querySelectorAll(`[data-column-id="${columnId}"]`);
+    elements.forEach((element: any) => {
+        element.style.removeProperty('background-color');
+        element.style.removeProperty('color');
+        element.removeAttribute('data-column-id');
+    });
+
+
 }
 
 

@@ -153,3 +153,8 @@ hr {
   color: var(--working-column-text-color) !important;
   background-color: var(--working-column-background-color) !important;
 }
+
+/* #excel_modal .window {
+  width: 60vw;
+  height: 60vh;
+} */

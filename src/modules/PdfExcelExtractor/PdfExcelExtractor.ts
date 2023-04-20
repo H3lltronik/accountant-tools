@@ -33,6 +33,8 @@ export function wrapTextNodes(node) {
 
 const handleValueClick = (e: MouseEvent) => {
   const color = store.getCurrentColor();
+  const column = store.getSelectedColumn();
+
   if (!color) {
     addToast({
       title: "No working column",
@@ -52,6 +54,9 @@ const handleValueClick = (e: MouseEvent) => {
     target.style.color = "initial";
     return;
   }
+
+  const columnId = column.id;
+  target.setAttribute("data-column-id", columnId as string);
 
   const newValue = store.makeValue(elementValue);
   target.setAttribute("data-id", newValue.id);

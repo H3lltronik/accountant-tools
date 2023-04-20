@@ -3,7 +3,7 @@
   import Icon from "svelte-icons-pack/Icon.svelte";
   import HiSolidUpload from "svelte-icons-pack/hi/HiSolidInformationCircle";
   import { Sheet } from "svelte-sheets";
-  import { convertToTableData } from "./script";
+  import * as scripts from "./script";
 
   export let message = "Hi";
   let appColumns = [];
@@ -11,7 +11,7 @@
 
   store.columns.subscribe((value) => {
     appColumns = value;
-    data = convertToTableData(appColumns);
+    data = scripts.convertToTableData(appColumns);
   });
 
   const doClosePopup = () => {
@@ -19,15 +19,14 @@
   };
 
   const doExport = () => {
-    
+    scripts.exportToExcel(data);
   };
 
   let columns = appColumns.map(x => ({ width: "100px" }));
-  console.log(columns);
 </script>
 
 <div>
-  <i><Icon src={HiSolidUpload} title="Columnas" /></i>
+  <i><Icon src={HiSolidUpload} title="Vista previa" /></i>
   <h2>Vista previa</h2>
 </div>
 

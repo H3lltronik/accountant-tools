@@ -24,5 +24,9 @@
     };
   </script>
   
-  <Modal show={$modal} on:close={closeModal}>
+  <Modal show={$modal} on:close={closeModal} id="excel_modal">
   </Modal>
+
+  <style>
+    
+  </style>

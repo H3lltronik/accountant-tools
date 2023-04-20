@@ -12,13 +12,15 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
+    "file-saver": "^2.0.5",
     "highlight.js": "^11.7.0",
     "svelte-icons-pack": "^2.1.0",
     "svelte-navigator": "^3.2.2",
     "svelte-routing": "^1.6.0",
     "svelte-sheets": "^1.0.0",
     "svelte-simple-modal": "^1.5.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.0.0",
