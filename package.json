@@ -17,7 +17,8 @@
     "svelte-navigator": "^3.2.2",
     "svelte-routing": "^1.6.0",
     "svelte-sheets": "^1.0.0",
-    "svelte-simple-modal": "^1.5.2"
+    "svelte-simple-modal": "^1.5.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.0.0",

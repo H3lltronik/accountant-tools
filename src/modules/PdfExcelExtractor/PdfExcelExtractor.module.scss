@@ -1,0 +1,76 @@
+.html_file_wrapper {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.html_file {
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  width: 100%;
+  transform-origin: top left;
+  transform: scale(1);
+  cursor: grab;
+}
+
+.html_file:active {
+  cursor: grabbing;
+}
+
+.html_file_controls {
+  top: 5px;
+  gap: 10px;
+  right: 20px;
+  z-index: 1001;
+  display: flex;
+  position: absolute;
+  button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+
+.pdf_extractor_controls {
+  gap: 10px;
+  display: flex;
+  button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__container {
+    gap: 5px;
+    top: 5px;
+    left: 10px;
+    z-index: 1001;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+  }
+  &__text {
+    padding: 5px;
+    width: fit-content;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.title {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.instructions {
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+}
+
+.instructions--hidden {
+  height: 0;
+  opacity: 0;
+  user-select: none;
+}

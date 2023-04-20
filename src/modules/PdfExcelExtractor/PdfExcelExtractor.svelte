@@ -8,13 +8,6 @@
 </script>
 
 <PageLayout title="Extractor PDF a Excel">
-  <h3>
-    <span>En esta seccion</span>
-  </h3>
-
-  <div class="mt-5" />
-  <hr />
-
   {#if $step === 1}
   <PdfViewer />
   {:else}

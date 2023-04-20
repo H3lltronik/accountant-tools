@@ -1,0 +1,81 @@
+<script lang="ts">
+  import * as store from "./store";
+  import { get } from "svelte/store";
+  import * as scripts from "./PdfExcelExtractor";
+  import styles from "./PdfExcelExtractor.module.scss";
+  import { addToast } from "@/lib/Sidebar/Toasts/toasts";
+
+  import Icon from "svelte-icons-pack/Icon.svelte";
+  import HiSolidZoomIn from "svelte-icons-pack/hi/HiSolidZoomIn";
+  import HiSolidZoomOut from "svelte-icons-pack/hi/HiSolidZoomOut";
+  import HiSolidExit from "svelte-icons-pack/hi/HiSolidArrowCircleLeft";
+  import HiSolidDefine from "svelte-icons-pack/hi/HiSolidPencil";
+  import HiSolidEye from "svelte-icons-pack/hi/HiSolidEye";
+  import HiSolidFinish from "svelte-icons-pack/hi/HiSolidCheckCircle";
+
+  let selectedColumn: Column | null = null;
+  store.workingColumnIdx.subscribe(() => {
+    selectedColumn = store.getSelectedColumn();
+  });
+
+  const handleGoBack = () => {
+    store.step.set(store.STEPS.SELECT_FILE);
+  };
+</script>
+
+<div class={styles.pdf_extractor_controls__container}>
+  <div class={styles.pdf_extractor_controls}>
+    <button
+      class="form__button form__button--smaller"
+      on:click={scripts.zoomIn}
+    >
+      <Icon src={HiSolidDefine} title="Definir columnas" />
+      <span>Definir columnas</span>
+    </button>
+    <button
+      class="form__button form__button--smaller"
+      on:click={scripts.restartZoom}
+    >
+      <Icon src={HiSolidEye} title="Ver progreso" />
+      <span>Ver progreso</span>
+    </button>
+    <button
+      class="form__button form__button--smaller form__button--primary"
+      on:click={handleGoBack}
+    >
+      <Icon src={HiSolidFinish} title="Terminar extraccion" />
+      <span>Terminar</span>
+    </button>
+  </div>
+  {#if selectedColumn !== null && selectedColumn !== undefined}
+    <div class={`${styles.pdf_extractor_controls} ${styles.pdf_extractor_controls__text}`}>
+      <div>
+        <span>Llenando columna: </span>
+        <strong style={`background-color: ${selectedColumn.color.backgroundColor}; color: ${selectedColumn.color.textColor}`}>
+            {selectedColumn.name}
+        </strong>
+      </div>
+    </div>
+  {/if}
+</div>
+
+<div class={styles.html_file_controls}>
+  <button class="form__button form__button--smaller" on:click={scripts.zoomIn}>
+    <Icon src={HiSolidZoomIn} title="Zoom in" />
+    <span>Zoom In</span>
+  </button>
+  <button
+    class="form__button form__button--smaller"
+    on:click={scripts.restartZoom}
+  >
+    <Icon src={HiSolidZoomOut} title="Zoom Restart" />
+    <span>Reiniciar Zoom</span>
+  </button>
+  <button
+    class="form__button form__button--smaller form__button--danger"
+    on:click={handleGoBack}
+  >
+    <Icon src={HiSolidExit} title="Terminar extraccion" />
+    <span>Regresar</span>
+  </button>
+</div>

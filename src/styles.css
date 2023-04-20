@@ -69,7 +69,7 @@
     --button-danger-background: #ff0000;
     --button-danger-color: #fff;
     --button-danger-hover-color: #fff;
-    --button-danger-hover-background: #ff2000;
+    --button-danger-hover-background: #ff0F60;
 
     --button-secondary-color: #000;
     --button-secondary-background: #fff;
@@ -150,5 +150,6 @@ hr {
 }
 .test-xd:hover {
   color: white;
-  background-color: var(--link-color) !important;
+  color: var(--working-column-text-color) !important;
+  background-color: var(--working-column-background-color) !important;
 }
