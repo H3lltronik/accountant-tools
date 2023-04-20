@@ -16,14 +16,14 @@
 </script>
 
 <h3>
-  <span>En esta seccion</span>
+  <span>En esta seccion podras extraer el contenido de texto de un PDF a un archivo de Excel a tu gusto</span>
 </h3>
 
-<div class="mt-5" />
 <hr />
+<div class="mt-5" />
 <h2>Selecciona el PDF</h2>
 
-{#if selected !== null}
+{#if selected !== null && selected !== undefined && selected !== ""}
   <p>El archivo seleccionado es: {selected}</p>
 {/if}
 
