@@ -4,12 +4,14 @@ mod globals;
 mod responses;
 mod diot_file;
 mod excel_differ;
+mod pdf_excel_extractor;
 use std::env;
 
 use std::process::Command;
 
 use crate::diot_file::diot_file::excel_to_diot;
 use crate::excel_differ::excel_differ::{excel_differ, Equivalence};
+use crate::pdf_excel_extractor::pdf_excel_extractor::test_pdf;
 
 #[tauri::command]
 fn open_folder(path: &str) {
@@ -54,6 +56,8 @@ fn copy_file(source: &str, destination: &str) {
 
 
 fn test () {
+
+
     let file1 = "G:\\Users\\H3LLT\\Downloads\\Nueva carpeta (2)\\file 1.xlsx";
     let file2 = "G:\\Users\\H3LLT\\Downloads\\Nueva carpeta (2)\\file 2.xlsx";
     let equivalences = vec![
@@ -76,7 +80,7 @@ fn main() {
     env::set_var(globals::DIOT_EXCEL_SHEET_NAME.name, globals::DIOT_EXCEL_SHEET_NAME.value);
 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![excel_to_diot, open_folder, copy_file])
+        .invoke_handler(tauri::generate_handler![excel_to_diot, open_folder, copy_file, test_pdf])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

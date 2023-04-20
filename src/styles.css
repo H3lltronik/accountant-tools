@@ -132,3 +132,12 @@ button.inline-btn {
 hr {
   border-color: var(--hr-color);
 }
+
+.test-xd {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.test-xd:hover {
+  color: white;
+  background-color: var(--link-color) !important;
+}

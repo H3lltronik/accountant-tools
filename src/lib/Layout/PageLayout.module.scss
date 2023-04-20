@@ -61,9 +61,15 @@
     text-transform: uppercase;
     color: var(--color-text-title);
     font-family: "Roboto-Thin", sans-serif;
+
+    &:focus {
+      outline: none;
+    }
   }
   &__content {
     padding-left: 60px;
+    padding-right: 60px;
     color: var(--color-text-body);
+    min-height: calc(100vh - 62px);
   }
 }
