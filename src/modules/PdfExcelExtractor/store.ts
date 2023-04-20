@@ -8,9 +8,9 @@ export const STEPS = {
 }
 
 export const step = writable(STEPS.SELECT_FILE);
-export const selectedFile = writable<String>("");
+export const selectedFile = writable<String>("G:\\Users\\H3LLT\\Downloads\\Cedula oportuno Obr-Pat\\Crystal Reports - Cedula Oportuno Obr-Pat_gbl Dic 2022.pdf");
 export const convertedFile = writable<String>("");
-
+export const columnsModalOpen = writable(false);
 
 
 
@@ -48,6 +48,16 @@ export const makeColumn = (name: String) => {
 
     if (get(workingColumnIdx) === -1) selectColumn(column.id);
     return column;
+}
+
+export const editColumn = (columnId: String, name: String) => {
+    const columnIdx = get(columns).findIndex((column) => column.id === columnId);
+    if (columnIdx < 0) return;
+
+    columns.update((cols) => {
+        cols[columnIdx].name = name;
+        return cols;
+    });
 }
 
 export const removeColumn = (columnId: String) => {

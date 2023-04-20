@@ -1,6 +1,6 @@
 <script lang="ts">
   import PageLayout from "@/lib/Layout/PageLayout.svelte";
-  import PdfViewer from "./PdfViewer.svelte";
+  import PdfViewer from "./PdfViewer/PdfViewer.svelte";
   import Home from "./Home.svelte";
   import { step } from "./store";
 

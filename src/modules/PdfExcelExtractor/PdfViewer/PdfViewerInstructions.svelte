@@ -1,5 +1,5 @@
 <script>
-    import styles from "./PdfExcelExtractor.module.scss";
+    import styles from "../PdfExcelExtractor.module.scss";
 
     export let opened = true;
 

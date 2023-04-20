@@ -1,9 +1,9 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/tauri";
   import { onMount } from "svelte";
-  import * as scripts from "./PdfExcelExtractor";
-  import styles from "./PdfExcelExtractor.module.scss";
-  import * as store from "./store";
+  import * as scripts from "../PdfExcelExtractor";
+  import styles from "../PdfExcelExtractor.module.scss";
+  import * as store from "../store";
   import { get } from 'svelte/store';
   import PdfViewerInstructions from "./PdfViewerInstructions.svelte";
   import PdfViewerControls from "./PdfViewerControls.svelte";

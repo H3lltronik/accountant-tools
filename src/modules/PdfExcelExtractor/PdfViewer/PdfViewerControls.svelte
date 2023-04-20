@@ -1,8 +1,8 @@
 <script lang="ts">
-  import * as store from "./store";
+  import * as store from "../store";
   import { get } from "svelte/store";
-  import * as scripts from "./PdfExcelExtractor";
-  import styles from "./PdfExcelExtractor.module.scss";
+  import * as scripts from "../PdfExcelExtractor";
+  import styles from "../PdfExcelExtractor.module.scss";
   import { addToast } from "@/lib/Sidebar/Toasts/toasts";
 
   import Icon from "svelte-icons-pack/Icon.svelte";
@@ -12,22 +12,31 @@
   import HiSolidDefine from "svelte-icons-pack/hi/HiSolidPencil";
   import HiSolidEye from "svelte-icons-pack/hi/HiSolidEye";
   import HiSolidFinish from "svelte-icons-pack/hi/HiSolidCheckCircle";
+  import Modal from "../Modals/ManageColumns/Modal.svelte";
 
   let selectedColumn: Column | null = null;
   store.workingColumnIdx.subscribe(() => {
+    selectedColumn = store.getSelectedColumn();
+  });
+  store.columns.subscribe(() => {
     selectedColumn = store.getSelectedColumn();
   });
 
   const handleGoBack = () => {
     store.step.set(store.STEPS.SELECT_FILE);
   };
+
+  const handleDefineColumns = () => {
+    store.columnsModalOpen.set(true);
+  };
 </script>
 
+<Modal />
 <div class={styles.pdf_extractor_controls__container}>
   <div class={styles.pdf_extractor_controls}>
     <button
       class="form__button form__button--smaller"
-      on:click={scripts.zoomIn}
+      on:click={handleDefineColumns}
     >
       <Icon src={HiSolidDefine} title="Definir columnas" />
       <span>Definir columnas</span>
