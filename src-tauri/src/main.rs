@@ -11,7 +11,7 @@ use std::process::Command;
 
 use crate::diot_file::diot_file::excel_to_diot;
 use crate::excel_differ::excel_differ::{excel_differ, Equivalence};
-use crate::pdf_excel_extractor::pdf_excel_extractor::test_pdf;
+use crate::pdf_excel_extractor::pdf_excel_extractor::{test_pdf, convert_pdf_to_html};
 
 #[tauri::command]
 fn open_folder(path: &str) {
@@ -80,7 +80,7 @@ fn main() {
     env::set_var(globals::DIOT_EXCEL_SHEET_NAME.name, globals::DIOT_EXCEL_SHEET_NAME.value);
 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![excel_to_diot, open_folder, copy_file, test_pdf])
+        .invoke_handler(tauri::generate_handler![excel_to_diot, open_folder, copy_file, test_pdf, convert_pdf_to_html])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

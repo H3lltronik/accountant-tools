@@ -1,3 +1,15 @@
+import { open, type OpenDialogOptions } from "@tauri-apps/api/dialog";
+import { convertedFile, step, STEPS } from "./store";
+import { invoke } from "@tauri-apps/api/tauri";
+
+
+export const goToStepTwo = async (selectedPdfPath: String) => {
+    const result = await invoke ('convert_pdf_to_html', { path: selectedPdfPath }) as string;
+    convertedFile.set(result);
+    step.set(STEPS.PDF_HANDLING);
+}
+
+
 export function wrapTextNodes(node) {
   if (node.nodeType == Node.TEXT_NODE) {
     var span = document.createElement("span");
@@ -13,6 +25,22 @@ export function wrapTextNodes(node) {
   }
 }
 
+export const handleSelectFile = async (options: OpenDialogOptions) => {
+  try {
+    const selectedFile = (await open(options)) as string | string[];
+    if (!selectedFile) return;
+    return selectedFile as string;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+// ZOOM SECTION
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+
 export function zoomIn() {
   const htmlFile = document.getElementById("html-file");
   const currentScale = parseFloat(
@@ -22,20 +50,11 @@ export function zoomIn() {
   htmlFile.style.transform = `scale(${newScale})`;
 }
 
-
-
-
-
-
-
-
-
-
-
-
+let initial = true;
 let isDragging = false;
 let lastX: number, lastY: number;
-let accumulatedDeltaX = 0, accumulatedDeltaY = 0;
+let accumulatedDeltaX = 0,
+  accumulatedDeltaY = 0;
 
 export function onMouseDown(event: MouseEvent) {
   event.preventDefault();
@@ -47,12 +66,15 @@ export function onMouseDown(event: MouseEvent) {
 export function onMouseMove(event: MouseEvent) {
   event.preventDefault();
   if (isDragging) {
+    if (initial) initial = false;
     const deltaX = event.clientX - lastX;
     const deltaY = event.clientY - lastY;
     accumulatedDeltaX += deltaX;
     accumulatedDeltaY += deltaY;
     const htmlFile = document.getElementById("html-file");
-    htmlFile.style.transform = `translate(${accumulatedDeltaX}px, ${accumulatedDeltaY}px) scale(${parseFloat(getComputedStyle(htmlFile).transform.slice(7, -1).split(', ')[0])})`;
+    htmlFile.style.transform = `translate(${accumulatedDeltaX}px, ${accumulatedDeltaY}px) scale(${parseFloat(
+      getComputedStyle(htmlFile).transform.slice(7, -1).split(", ")[0]
+    )})`;
     lastX = event.clientX;
     lastY = event.clientY;
   }
@@ -69,6 +91,8 @@ export function onMouseLeave(event: MouseEvent) {
 }
 
 export function restartZoom() {
+  isDragging = false;
+  initial = true;
   const htmlFile = document.getElementById("html-file");
   htmlFile.style.transform = `translate(0px, 0px) scale(1)`;
 }

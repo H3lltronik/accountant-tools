@@ -6,17 +6,17 @@ use tauri::command;
 
 pub fn read_file(relative_path: &str) -> std::io::Result<String> {
     // Run the "dir" command to list the files in the directory
-    match Command::new("cmd")
-        .arg("/c")
-        .arg("dir")
-        .output() {
-        Ok(output) => {
-            println!("Output: {}", String::from_utf8_lossy(&output.stdout));
-        },
-        Err(err) => {
-            println!("Error on dir: {}", err);
-        }
-    };
+    // match Command::new("cmd")
+    //     .arg("/c")
+    //     .arg("dir")
+    //     .output() {
+    //     Ok(output) => {
+    //         println!("Output: {}", String::from_utf8_lossy(&output.stdout));
+    //     },
+    //     Err(err) => {
+    //         println!("Error on dir: {}", err);
+    //     }
+    // };
 
     let path = PathBuf::from(&relative_path);
     // let path = PathBuf::from("./assets/pdf.html");

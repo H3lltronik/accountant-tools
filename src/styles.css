@@ -24,6 +24,12 @@
   --button-primary-hover-background: #2e5bb8;
 
 
+  --button-danger-background: #ff0000;
+  --button-danger-color: #fff;
+  --button-danger-hover-color: #fff;
+  --button-danger-hover-background: #ff2000;
+
+
   --button-secondary-color: #000;
   --button-secondary-background: #fff;
   --button-secondary-hover-color: #fff;
@@ -59,6 +65,11 @@
     --button-primary-background: #535bf2;
     --button-primary-hover-color: #fff;
     --button-primary-hover-background: #2e5bb8;
+
+    --button-danger-background: #ff0000;
+    --button-danger-color: #fff;
+    --button-danger-hover-color: #fff;
+    --button-danger-hover-background: #ff2000;
 
     --button-secondary-color: #000;
     --button-secondary-background: #fff;
