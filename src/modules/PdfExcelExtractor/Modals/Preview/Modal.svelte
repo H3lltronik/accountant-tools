@@ -10,7 +10,7 @@
     $: {
         const showModal = () => modal.set(bind(Popup, {}));
 
-        store.columnsModalOpen.subscribe((value) => {
+        store.previewModalOpen.subscribe((value) => {
             if (value) {
                 showModal();
             } else {
@@ -20,7 +20,7 @@
     }
 
     const closeModal = () => {
-        store.columnsModalOpen.set(false);
+        store.previewModalOpen.set(false);
     };
   </script>
   

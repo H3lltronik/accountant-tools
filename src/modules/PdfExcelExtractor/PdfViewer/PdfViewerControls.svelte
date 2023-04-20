@@ -12,7 +12,9 @@
   import HiSolidDefine from "svelte-icons-pack/hi/HiSolidPencil";
   import HiSolidEye from "svelte-icons-pack/hi/HiSolidEye";
   import HiSolidFinish from "svelte-icons-pack/hi/HiSolidCheckCircle";
-  import Modal from "../Modals/ManageColumns/Modal.svelte";
+
+  import DefineColumnsModal from "../Modals/ManageColumns/Modal.svelte";
+  import PreviewModal from "../Modals/Preview/Modal.svelte";
 
   let selectedColumn: Column | null = null;
   store.workingColumnIdx.subscribe(() => {
@@ -31,9 +33,15 @@
   const handleDefineColumns = () => {
     store.columnsModalOpen.set(true);
   };
+
+  const handlePreview = () => {
+    store.previewModalOpen.set(true);
+  };
 </script>
 
-<Modal />
+<DefineColumnsModal />
+<PreviewModal />
+
 <div class={styles.pdf_extractor_controls__container}>
   <div class={styles.pdf_extractor_controls}>
     <button
@@ -45,7 +53,7 @@
     </button>
     <button
       class="form__button form__button--smaller"
-      on:click={scripts.restartZoom}
+      on:click={handlePreview}
     >
       <Icon src={HiSolidEye} title="Ver progreso" />
       <span>Ver progreso</span>
