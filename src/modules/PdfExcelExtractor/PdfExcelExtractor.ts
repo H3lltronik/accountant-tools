@@ -2,6 +2,8 @@ import { open, type OpenDialogOptions } from "@tauri-apps/api/dialog";
 import { convertedFile, step, STEPS } from "./store";
 import { invoke } from "@tauri-apps/api/tauri";
 import * as store from "./store";
+import { addToast } from "@/lib/Sidebar/Toasts/toasts";
+import { get } from "svelte/store";
 export const goToStepTwo = async (selectedPdfPath: String) => {
   const result = (await invoke("convert_pdf_to_html", {
     path: selectedPdfPath,
@@ -87,8 +89,13 @@ export function zoomIn() {
     getComputedStyle(htmlFile).transform.slice(7, -1).split(", ")[0]
   );
   const newScale = currentScale + 0.2;
+  const rect = htmlFile.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  htmlFile.style.transformOrigin = `${centerX}px ${centerY}px`;
   htmlFile.style.transform = `scale(${newScale})`;
 }
+
 
 let initial = true;
 let isDragging = false;
@@ -137,6 +144,21 @@ export function restartZoom() {
   htmlFile.style.transform = `translate(0px, 0px) scale(1)`;
 }
 
-function addToast(arg0: { title: string; message: string; type: string; }) {
-throw new Error("Function not implemented.");
+// register event for pressing a number key from 0 to 9
+export const enableNumberShortcuts = () => {
+  document.addEventListener("keydown", (event) => {
+    if (event.key >= "1" && event.key <= "9") {
+      const number = parseInt(event.key);
+
+      console.log("number", number)
+      console.log("columns", get(store.columns).length)
+
+      if (number > get(store.columns).length + 1) return;
+
+      const column = get(store.columns)[number - 1];
+
+      if (column) store.selectColumn(column.id);
+
+    }
+  });
 }

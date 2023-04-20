@@ -34,22 +34,15 @@
     <li>
       <span>Seleccione POR COLUMNA todos los elementos que pertenezcan a la columa en progreso</span>
     </li>
-    
-    <li>
-      <span>Una vez haya terminado de seleccionar todos los elementos de la columna, presiona ENTER para comenzar a llenar la siguiente columa</span>
-      <ul>
-        <li>Si presionas ENTER en la ultima columa que hayas elegido, se tomara como si haya presionado el boton de TERMINAR</li>
-      </ul>
-    </li>
 
     <li>
-      <span>Cuando termine de seleccionar, haga click en "Terminar"</span>
+      <span>Cuando termine de seleccionar, haga click en "Ver progeso" en donde podras descargar tu Excel</span>
     </li>
     
   </ol>
 
-  <div class="">Si lo prefieres, tambien puedes eliminar manualmente el registro de algun elemento de manera manual al hacer click en "Ver progreso"</div>
+  <div class="">Atajos:</div>
   <br>
   <div class=""><i>CTRL + Z</i> -> <strong>Retroceder seleccion</strong></div>
-  <div class=""><i>ENTER</i> -> <strong>Siguiente/Finalizar seleccion de columna(s)</strong></div>
+  <div class=""><i>0 - 9</i> -> <strong>Seleccion de columna(s)</strong></div>
 </div>

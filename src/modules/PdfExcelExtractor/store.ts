@@ -8,7 +8,7 @@ export const STEPS = {
 }
 
 export const step = writable(STEPS.SELECT_FILE);
-export const selectedFile = writable<String>("G:\\Users\\H3LLT\\Downloads\\Cedula oportuno Obr-Pat\\Crystal Reports - Cedula Oportuno Obr-Pat_gbl Dic 2022.pdf");
+export const selectedFile = writable<String>("");
 export const convertedFile = writable<String>("");
 
 export const columnsModalOpen = writable(false);

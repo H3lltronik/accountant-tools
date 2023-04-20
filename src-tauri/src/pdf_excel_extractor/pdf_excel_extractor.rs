@@ -23,9 +23,10 @@ pub fn convert_pdf_to_html(path: String) -> Result<String, String> {
     println!("Path: {}", path);
 
     let output_path = String::from("./assets/temp_pdf.html");
+    let data_path = String::from("./binaries/pdf2htmlEX/data");
 
     let output = match Command::new("pdf2htmlEX.exe")
-        .args(&["--data-dir", "C:\\Stuff\\pdf2htmlEX-win32-0.14.6-upx-with-poppler-data\\data", path.as_str(), output_path.as_str()])
+        .args(&["--data-dir", &data_path, path.as_str(), output_path.as_str()])
         .output() {
         Ok(output) => output,
         Err(err) => {

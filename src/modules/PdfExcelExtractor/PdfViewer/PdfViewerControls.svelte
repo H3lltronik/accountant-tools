@@ -15,6 +15,7 @@
 
   import DefineColumnsModal from "../Modals/ManageColumns/Modal.svelte";
   import PreviewModal from "../Modals/Preview/Modal.svelte";
+  import { onMount } from "svelte";
 
   let selectedColumn: Column | null = null;
   store.workingColumnIdx.subscribe(() => {
@@ -37,6 +38,10 @@
   const handlePreview = () => {
     store.previewModalOpen.set(true);
   };
+
+  onMount(async () => {
+    scripts.enableNumberShortcuts();
+  })
 </script>
 
 <DefineColumnsModal />
@@ -78,6 +83,13 @@
     </div>
 
     <div class={styles.pdf_extractor_controls__text}>Filas: {selectedColumn.values.length}</div>
+
+    <span>Atajos:</span>
+    {#each columns as column, i}
+      <div class={styles.pdf_extractor_controls__text} style={`background-color: ${column.color.backgroundColor}; color: ${column.color.textColor}`}>
+        [{i+1}] {column.name}
+      </div>
+    {/each}
   {/if}
 
 </div>
