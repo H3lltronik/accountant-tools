@@ -27,7 +27,14 @@
     selectedColumn = store.getSelectedColumn();
   });
 
-  const handleGoBack = () => {
+  const handleGoBack = async () => {
+    const confirm = await window.confirm("¿Estas seguro de que quieres salir? Se perderan los cambios");
+
+    if (confirm) {
+      store.reset();
+      store.step.set(store.STEPS.SELECT_FILE);
+    }
+
     store.step.set(store.STEPS.SELECT_FILE);
   };
 

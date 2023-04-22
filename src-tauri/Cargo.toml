@@ -24,6 +24,9 @@ thiserror = "1.0.40"
 lazy_static = "1.4.0"
 chrono = "0.4.19"
 pdf-extract = "0.6.4"
+env_logger = "0.10.0"
+log = "0.4.17"
+directories = "5.0.0"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

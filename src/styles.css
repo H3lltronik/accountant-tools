@@ -51,6 +51,8 @@
   --menu-item-text-hover-color: #fff;
   --menu-item-background-color: #fff;
   --menu-item-background-hover-color: #535bf2;
+
+  --loader-background-color: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -89,6 +91,8 @@
     --menu-item-background-color: #fff;
     --menu-item-text-hover-color: #535bf2;
     --menu-item-background-hover-color: #fff;
+
+    --loader-background-color: rgba(0, 0, 0, 0.5);
   }
 }
 

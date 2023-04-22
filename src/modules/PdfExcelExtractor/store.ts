@@ -64,7 +64,7 @@ export const editColumn = (columnId: String, name: String) => {
 
 export const removeColumn = (columnId: String): Boolean => {
     const columnIdx = get(columns).findIndex((column) => column.id === columnId);
-    if (!columnIdx) return false;
+    if (columnIdx == undefined && columnIdx == null) return false;
 
     columns.update((cols) => cols.filter((column) => column.id !== columnId));
     
@@ -150,4 +150,14 @@ export const getCurrentColor = () : Color | null => {
     if (columnIdx < 0 || columnItems === undefined) return null;
 
     return columnItems.color;
+}
+
+export const reset = () => {
+    columns.set([]);
+    workingColumnIdx.set(-1);
+    document.documentElement.style.removeProperty('--working-column-background-color');
+    document.documentElement.style.removeProperty('--working-column-text-color');
+
+    selectedFile.set("");
+    convertedFile.set("");
 }

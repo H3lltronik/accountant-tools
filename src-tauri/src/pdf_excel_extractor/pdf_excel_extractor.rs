@@ -1,8 +1,10 @@
-use pdf_extract;
 use tauri;
-use std::fs::File;
-use std::io::prelude::*;
 use std::path::PathBuf;
+use std::path::Path;
+extern crate directories;
+use directories::{BaseDirs, UserDirs, ProjectDirs};
+
+use crate::pdf_excel_extractor::utils::ensure_dir_exists;
 
 use super::utils::read_file;
 
@@ -20,13 +22,31 @@ pub fn test_pdf(path: String) -> Result<String, String> {
 #[tauri::command]
 pub fn convert_pdf_to_html(path: String) -> Result<String, String> {
     use std::process::Command;
-    println!("Path: {}", path);
+    let data_pdf2html_path = String::from("./binaries/pdf2htmlEX/data");
+    let filename = Path::new(&path).file_stem().unwrap();
+    
 
-    let output_path = String::from("./assets/temp_pdf.html");
-    let data_path = String::from("./binaries/pdf2htmlEX/data");
+    let data_dir = match ProjectDirs::from("com", "h3lltronik", "accountant-tools-app") {
+        Some(dirs) => dirs.data_local_dir().to_owned(),
+        None => {
+            println!("Error on ProjectDirs");
+            return Err("Error on ProjectDirs".to_string());
+        }
+    };
+
+    let output_path = data_dir.join("pdf2htmlEX");
+
+    let path_output = PathBuf::from(&output_path);
+    match ensure_dir_exists(&path_output) {
+        Ok(_) => (),
+        Err(err) => {
+            println!("Error on ensure_dir_exists: {}", err);
+            return Err(err.to_string());
+        }
+    }
 
     let output = match Command::new("pdf2htmlEX.exe")
-        .args(&["--data-dir", &data_path, path.as_str(), output_path.as_str()])
+        .args(&["--data-dir", &data_pdf2html_path, path.as_str(), "--dest-dir", output_path.to_str().unwrap()])
         .output() {
         Ok(output) => output,
         Err(err) => {
@@ -35,21 +55,12 @@ pub fn convert_pdf_to_html(path: String) -> Result<String, String> {
         }
     };
 
-
-    println!("status: {}", output.status);
-    println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
-    println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
-
     if !output.status.success() {
-        return Err(format!(
-            "Command exited with status code {}",
-            output.status.code().unwrap_or(-1)
-        ));
+        return Err(format!("Command exited with status code {}", output.status.code().unwrap_or(-1)));
     }
 
-    //fs::canonicalize(&srcdir) 
     let result_path = PathBuf::from(&output_path);
-    let full_result_path = match result_path.canonicalize() {
+    let mut full_result_path = match result_path.canonicalize() {
         Ok(path) => path,
         Err(err) => {
             println!("Error on canonicalize: {}", err);
@@ -57,20 +68,8 @@ pub fn convert_pdf_to_html(path: String) -> Result<String, String> {
         }
     };
 
+    full_result_path.push(filename.to_str().unwrap().to_owned() + ".html");
+
     Ok(String::from(full_result_path.to_str().unwrap()))
 }
 
-
-// pub fn test_pdf() -> Result<(), Box<dyn std::error::Error>> {
-//     let out = match pdf_extract::extract_text(".\\assets\\pdf.pdf") {
-//         Ok(out) => out,
-//         Err(err) => {
-//             println!("Error: {}", err);
-//             return Ok(());
-//         }
-//     };
-
-//     // println!("{:?}", out);
-
-//     Ok(())
-// }

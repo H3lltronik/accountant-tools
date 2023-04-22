@@ -75,8 +75,18 @@ fn test () {
     };
 }
 
+use env_logger::Env;
+use log::{debug, info, warn};
+
 fn main() {
     test(); 
+    // Set up the logger
+    let env = Env::default().filter_or("MYAPP_LOG", "info");
+    env_logger::init_from_env(env);
+    debug!("This is a debug message");
+    info!("This is an info message");
+    warn!("This is a warning message");
+    
     env::set_var(globals::DIOT_EXCEL_SHEET_NAME.name, globals::DIOT_EXCEL_SHEET_NAME.value);
 
     tauri::Builder::default()

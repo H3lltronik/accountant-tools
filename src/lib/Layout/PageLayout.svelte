@@ -1,4 +1,5 @@
 <script>
+  import { isAppLoading } from '@/store/app.store';
     import styles from './PageLayout.module.scss';
     import Icon from "svelte-icons-pack/Icon.svelte";
     import HiIcon from "svelte-icons-pack/hi/HiSolidCog";
@@ -26,4 +27,15 @@
     <section class={styles.page__content}>
         <slot />
     </section>
+
+    {#if $isAppLoading}
+        <div class={styles.page__loader}>
+            <div class={styles.page__loader__icon}>
+                <div class={styles.page__loader__icon__bar}></div>
+                <div class={styles.page__loader__icon__bar}></div>
+                <div class={styles.page__loader__icon__bar}></div>
+            </div>
+        </div>
+    {/if}
+
 </div>

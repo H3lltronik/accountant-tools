@@ -4,11 +4,16 @@ import { invoke } from "@tauri-apps/api/tauri";
 import * as store from "./store";
 import { addToast } from "@/lib/Sidebar/Toasts/toasts";
 import { get } from "svelte/store";
+import { isAppLoading } from "@/store/app.store";
 export const goToStepTwo = async (selectedPdfPath: String) => {
+  
+  isAppLoading.set(true);
   const result = (await invoke("convert_pdf_to_html", {
     path: selectedPdfPath,
   })) as string;
   convertedFile.set(result);
+  isAppLoading.set(false);
+
   step.set(STEPS.PDF_HANDLING);
 };
 
