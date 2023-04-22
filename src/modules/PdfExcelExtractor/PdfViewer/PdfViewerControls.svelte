@@ -3,7 +3,7 @@
   import { get } from "svelte/store";
   import * as scripts from "../PdfExcelExtractor";
   import styles from "../PdfExcelExtractor.module.scss";
-  import { addToast } from "@/lib/Sidebar/Toasts/toasts";
+  import SortList from 'svelte-sortlist'
 
   import Icon from "svelte-icons-pack/Icon.svelte";
   import HiSolidZoomIn from "svelte-icons-pack/hi/HiSolidZoomIn";
@@ -29,13 +29,12 @@
 
   const handleGoBack = async () => {
     const confirm = await window.confirm("¿Estas seguro de que quieres salir? Se perderan los cambios");
+    console.log("confirm", confirm)
 
     if (confirm) {
       store.reset();
       store.step.set(store.STEPS.SELECT_FILE);
     }
-
-    store.step.set(store.STEPS.SELECT_FILE);
   };
 
   const handleDefineColumns = () => {
@@ -92,11 +91,16 @@
     <div class={styles.pdf_extractor_controls__text}>Filas: {selectedColumn.values.length}</div>
 
     <span>Atajos:</span>
-    {#each columns as column, i}
+    <SortList bind:list={columns} let:item let:index>
+      <div class={styles.pdf_extractor_controls__text} style={`background-color: ${item.color.backgroundColor}; color: ${item.color.textColor}`}>
+        [{index+1}] {item.name} ({item.values.length})
+      </div>
+    </SortList>
+    <!-- {#each columns as column, i}
       <div class={styles.pdf_extractor_controls__text} style={`background-color: ${column.color.backgroundColor}; color: ${column.color.textColor}`}>
         [{i+1}] {column.name} ({column.values.length})
       </div>
-    {/each}
+    {/each} -->
   {/if}
 
 </div>

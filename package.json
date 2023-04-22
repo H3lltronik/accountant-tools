@@ -19,6 +19,7 @@
     "svelte-routing": "^1.6.0",
     "svelte-sheets": "^1.0.0",
     "svelte-simple-modal": "^1.5.2",
+    "svelte-sortlist": "^1.0.3",
     "uuid": "^9.0.0",
     "xlsx": "^0.18.5"
   },

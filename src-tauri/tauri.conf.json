@@ -61,7 +61,8 @@
         "width": 1000,
         "height": 700,
         "minHeight": 500,
-        "minWidth": 900
+        "minWidth": 900,
+        "fileDropEnabled": false
       }
     ]
   }
