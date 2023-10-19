@@ -14,13 +14,13 @@
 </script>
 
 <Link
-  to={routes.batchUpload.path}
+  to={routes.chatbot.path}
   class={styles.content__item}
   data-type="route_link"
   on:click={() => isSidebarOpened.set(false)}
 >
   <div class={styles.content__item__icon}>
-    <Icon src={HiSolidUpload} title="Carga batch" />
+    <Icon src={HiSolidUpload} title="Chatbot" />
   </div>
-  <span class={styles.content__item__text}>Carga Batch DIOT</span>
+  <span class={styles.content__item__text}>Chatbot</span>
 </Link>
